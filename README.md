@@ -140,7 +140,7 @@ The app is fully responsive and includes:
 
 ## 📄 License
 
-This repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This repository is licensed under the GPL-3.0 license - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
