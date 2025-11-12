@@ -1,0 +1,15 @@
+# robots.txt for DeepLX App
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of these paths (if they exist in future)
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://deeplx.xi-xu.me/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1
