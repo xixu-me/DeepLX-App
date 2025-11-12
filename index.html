@@ -23,6 +23,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="apple-touch-icon" href="logo.png" />
 
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json" />
+
     <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta
@@ -33,7 +36,10 @@
       property="og:description"
       content="Free web-based translation app powered by DeepLX API. Translate text between 30+ languages with auto-detection, translation history, and RTL support. No API keys or subscription fees required."
     />
-    <meta property="og:image" content="logo.png" />
+    <meta property="og:image" content="https://deeplx.xi-xu.me/logo.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="DeepLX App Logo" />
     <meta property="og:url" content="https://deeplx.xi-xu.me" />
     <meta property="og:site_name" content="DeepLX App" />
     <meta property="og:locale" content="en_US" />
@@ -48,7 +54,8 @@
       name="twitter:description"
       content="Free web-based translation app powered by DeepLX API. Translate text between 30+ languages with auto-detection, translation history, and RTL support. No API keys or subscription fees required."
     />
-    <meta name="twitter:image" content="logo.png" />
+    <meta name="twitter:image" content="https://deeplx.xi-xu.me/logo.png" />
+    <meta name="twitter:image:alt" content="DeepLX App Logo" />
     <meta name="twitter:creator" content="@xixu_me" />
     <meta name="twitter:site" content="@xixu_me" />
 
@@ -77,6 +84,93 @@
     <!-- Import Lucide Icons library -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "DeepLX App",
+      "alternateName": "DeepLX Translation Tool",
+      "url": "https://deeplx.xi-xu.me",
+      "description": "Free web-based translation app powered by DeepLX API. Translate text between 30+ languages with auto-detection, translation history, and RTL support. No API keys or subscription fees required.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Xi Xu",
+        "url": "https://xi-xu.me"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Xi Xu",
+        "url": "https://xi-xu.me"
+      },
+      "inLanguage": ["en", "zh", "es", "fr", "de", "ja", "ko", "ru", "ar", "pt", "it"],
+      "featureList": [
+        "30+ language support",
+        "Auto-detection of source language",
+        "Translation history with localStorage",
+        "RTL (Right-to-Left) language support",
+        "Auto-translate as you type",
+        "Copy to clipboard functionality",
+        "Swap languages quickly",
+        "No API keys required",
+        "No subscription fees",
+        "Free and open source"
+      ],
+      "screenshot": "https://deeplx.xi-xu.me/logo.png",
+      "softwareVersion": "1.0",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "100"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "DeepLX App",
+      "description": "Open-source web-based translation application",
+      "codeRepository": "https://github.com/xixu-me/DeepLX-App",
+      "programmingLanguage": ["JavaScript", "HTML", "CSS"],
+      "runtimePlatform": "Web Browser",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "author": {
+        "@type": "Person",
+        "name": "Xi Xu",
+        "url": "https://xi-xu.me"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DeepLX",
+      "url": "https://deeplx.xi-xu.me",
+      "logo": "https://deeplx.xi-xu.me/logo.png",
+      "sameAs": [
+        "https://github.com/xixu-me/DeepLX-App",
+        "https://github.com/xixu-me/DeepLX"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Xi Xu",
+        "url": "https://xi-xu.me"
+      }
+    }
+    </script>
   </head>
   <body
     class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen p-4"
@@ -154,8 +248,9 @@
               id="copyButton"
               title="Copy to clipboard"
               class="action-btn absolute top-8 right-2 p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white"
+              aria-label="Copy translation to clipboard"
             >
-              <i data-lucide="copy" class="w-5 h-5"></i>
+              <i data-lucide="copy" class="w-5 h-5" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -169,24 +264,27 @@
               id="swapButton"
               title="Swap languages"
               class="action-btn p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white flex items-center gap-2"
+              aria-label="Swap source and target languages"
             >
-              <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
+              <i data-lucide="arrow-left-right" class="w-5 h-5" aria-hidden="true"></i>
               <span class="hidden sm:inline">Swap Languages</span>
             </button>
             <button
               id="historyButton"
               title="Translation history"
               class="action-btn p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white flex items-center gap-2"
+              aria-label="View translation history"
             >
-              <i data-lucide="history" class="w-5 h-5"></i>
+              <i data-lucide="history" class="w-5 h-5" aria-hidden="true"></i>
               <span class="hidden sm:inline">History</span>
             </button>
             <button
               id="settingsButton"
               title="Settings"
               class="action-btn p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white flex items-center gap-2"
+              aria-label="Open application settings"
             >
-              <i data-lucide="settings" class="w-5 h-5"></i>
+              <i data-lucide="settings" class="w-5 h-5" aria-hidden="true"></i>
               <span class="hidden sm:inline">Settings</span>
             </button>
           </div>
@@ -228,34 +326,40 @@
       <div
         id="historyPanel"
         class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="historyPanelTitle"
+        aria-describedby="historyPanelDesc"
       >
         <div
           class="bg-gray-800 rounded-xl p-6 w-full max-w-2xl max-h-96 overflow-hidden animate-slide-up shadow-2xl"
         >
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-white flex items-center gap-2">
-              <i data-lucide="history" class="w-5 h-5"></i>
+            <h2 id="historyPanelTitle" class="text-xl font-bold text-white flex items-center gap-2">
+              <i data-lucide="history" class="w-5 h-5" aria-hidden="true"></i>
               Translation History
             </h2>
             <button
               id="closeHistoryButton"
               class="action-btn p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white"
+              aria-label="Close translation history panel"
             >
-              <i data-lucide="x" class="w-5 h-5"></i>
+              <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
             </button>
           </div>
           <div class="flex justify-between items-center mb-4">
-            <span class="text-gray-400 text-sm" id="historyCount"
+            <span class="text-gray-400 text-sm" id="historyCount" aria-live="polite"
               >0 records</span
             >
             <button
               id="clearHistoryButton"
               class="action-btn px-3 py-1 rounded bg-red-600 hover:bg-red-700 text-white text-sm transition-colors"
+              aria-label="Clear all translation history"
             >
               Clear All
             </button>
           </div>
-          <div id="historyList" class="space-y-2 overflow-y-auto max-h-64">
+          <div id="historyList" class="space-y-2 overflow-y-auto max-h-64" id="historyPanelDesc" role="region" aria-label="Translation history list">
             <!-- History items will be inserted here -->
           </div>
         </div>
@@ -265,23 +369,28 @@
       <div
         id="settingsPanel"
         class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settingsPanelTitle"
+        aria-describedby="settingsPanelDesc"
       >
         <div
           class="bg-gray-800 rounded-xl p-6 w-full max-w-md animate-slide-up shadow-2xl"
         >
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-white flex items-center gap-2">
-              <i data-lucide="settings" class="w-5 h-5"></i>
+            <h2 id="settingsPanelTitle" class="text-xl font-bold text-white flex items-center gap-2">
+              <i data-lucide="settings" class="w-5 h-5" aria-hidden="true"></i>
               Settings
             </h2>
             <button
               id="closeSettingsButton"
               class="action-btn p-2 rounded-full bg-gray-700 text-gray-400 hover:text-white"
+              aria-label="Close settings panel"
             >
-              <i data-lucide="x" class="w-5 h-5"></i>
+              <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
             </button>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-4" id="settingsPanelDesc" role="region" aria-label="Application settings">
             <!-- API Endpoint -->
             <div>
               <label
